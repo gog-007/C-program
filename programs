@@ -1,0 +1,116 @@
+ int* result = (int*)malloc(2 * sizeof(int));
+    *returnSize = 2;
+    
+    for (int i = 0; i < numsSize; i++) {
+        for (int j = i + 1; j < numsSize; j++) {
+            if (nums[i] + nums[j] == target) {
+                result[0] = i;
+                result[1] = j;
+                return result;
+            }
+        }
+    }
+    
+    result[0] = 0;
+    result[1] = 1;
+    return result;
+}
+
+struct ListNode* listHead = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* listTail = listHead;
+    listTail->val = 0;
+
+    
+    while (true) {
+        int val = (l1 ? l1->val: 0) + (l2 ? l2->val: 0) + listTail->val;
+
+        listTail->val = val % 10;
+        
+        l1 = l1 ? l1->next : NULL;
+
+        if (!s || !*s) 
+        return 0;
+    
+    int charIndexMap[256]
+    memset(charIndexMap, -1, sizeof(charIndexMap))
+    
+    int maxLength = 0;
+    int startIndex = 0;
+    int i;
+    
+    for (i = 0; s[i] != '\0'; i++) 
+        if (charIndexMap[s[i]] != -1 && charIndexMap[s[i]] >= startIndex) {
+            startIndex = charIndexMap[s[i]] + 1;
+        }
+        
+        charIndexMap[s[i]] = i;
+        
+      
+        if (i - startIndex + 1 > maxLength) {
+            maxLength = i - startIndex + 1;
+        }
+    }
+    
+    return maxLength;
+        l2 = l2 ? l2->next : NULL;
+        
+        if (l1 || l2 || val/10) {
+            listTail->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+            listTail->next->val = val/10;
+            listTail = listTail->next;
+            
+        }
+        else {
+            listTail->next = NULL;
+            return listHead;
+        }
+    }
+
+double findMedianSortedArrays(int* nums1, int m, int* nums2, int n) {
+    int totalLength = m + n;
+    int middle = totalLength / 2;
+    int i = 0, j = 0;
+    int current = 0, prev = 0;
+
+    for (int k = 0; k <= middle; k++) {
+        prev = current;
+        if (i < m && (j >= n || nums1[i] <= nums2[j])) {
+            current = nums1[i++];
+        } else {
+            current = nums2[j++];
+        }
+    }
+
+    if (totalLength % 2 == 1) {
+        return current;
+    }else {
+        return (prev + current) / 2.0;
+    }
+}
+
+char* longestPalindrome(char* s) {
+    char *start, *end;
+    char *p = s, *subStart = s;
+    int maxLen = 1;
+    while(*p){
+        start = p; end = p;
+        
+        while(*(end+1) && *(end+1) == *end){
+            end++; // skip duplicates
+        }
+        p = end + 1;
+        
+        while(*(end + 1) && (start > s) && *(end + 1) == *(start - 1)){
+            start--;
+            end++;
+        }
+        if(end - start + 1 > maxLen){
+            maxLen = end - start + 1;
+            subStart = start;
+        }
+    }
+    
+    char *rst = (char *) calloc(maxLen + 1, sizeof(char));
+    strncpy(rst, subStart, maxLen);
+    return rst;
+}
